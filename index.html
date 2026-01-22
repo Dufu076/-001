@@ -53,20 +53,6 @@
       0% { transform: scale(0); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
-
-    .confetti-piece {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #ffd700;
-      top: -10%;
-      opacity: 0;
-      animation: confetti-fall 3s ease-out infinite;
-    }
-    @keyframes confetti-fall {
-      0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 1; }
-      100% { top: 100%; transform: translateX(100px) rotate(360deg); opacity: 0; }
-    }
   </style>
 <script type="importmap">
 {
@@ -75,12 +61,16 @@
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "recharts": "https://esm.sh/recharts@^3.7.0"
+    "recharts": "https://esm.sh/recharts@^3.7.0",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
 </head>
 <body>
   <div id="root"></div>
+  <!-- 必须添加下面这行代码来加载你的应用逻辑 -->
+  <script type="module" src="/index.tsx"></script>
 </body>
 </html>
