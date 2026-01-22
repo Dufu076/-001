@@ -1,0 +1,17 @@
+{
+  "name": "视力觉醒",
+  "short_name": "视力觉醒",
+  "description": "专业级远近聚焦训练工具。通过科学的 30s-5s 交替训练法，帮助缓解视疲劳，提升晶状体调节能力。",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/fluency/512/visible.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "requestFramePermissions": [],
+  "theme_color": "#020617",
+  "background_color": "#020617",
+  "display": "standalone",
+  "orientation": "portrait"
+}
