@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日产轩逸 车型配置仅供参考</title>
+  <style>
+    :root {
+      --page-bg: #eef5fc;
+      --card-bg: #ffffff;
+      --text: #1f2430;
+      --subtle: #667085;
+      --line: #e7edf4;
+      --blue: #1f71d8;
+      --blue-soft: #dcebff;
+      --blue-pale: #edf6ff;
+      --green: #55c983;
+      --green-text: #66c89e;
+      --orange: #ff981f;
+      --shadow: 0 10px 30px rgba(40, 86, 138, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(180deg, #f7fbff 0%, #eef5fc 100%);
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      padding: 16px;
+      gap: 18px;
+    }
+
+    .phone {
+      width: 100%;
+      max-width: 589px;
+      background: #f7fbff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(41, 79, 130, 0.14);
+    }
+
+    .page {
+      padding-bottom: 28px;
+    }
+
+    .editor-panel {
+      width: 360px;
+      flex: 0 0 360px;
+      align-self: flex-start;
+      position: sticky;
+      top: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid #dde7f2;
+      border-radius: 22px;
+      box-shadow: 0 16px 40px rgba(45, 85, 133, 0.12);
+      padding: 18px 18px 20px;
+      backdrop-filter: blur(14px);
+    }
+
+    .editor-panel::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .editor-panel::-webkit-scrollbar-thumb {
+      background: #d6e2ef;
+      border-radius: 999px;
+    }
+
+    .editor-title {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .editor-subtitle {
+      margin: 8px 0 16px;
+      color: #607084;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .editor-group {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #e8eff7;
+    }
+
+    .editor-group:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .editor-group h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .field {
+      margin-top: 12px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      color: #4e5d6f;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field input[type="text"],
+    .field textarea {
+      width: 100%;
+      border: 1px solid #d5e1ee;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font: inherit;
+      color: #1f2430;
+      background: #fdfefe;
+    }
+
+    .field textarea {
+      min-height: 88px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .field input[type="file"] {
+      width: 100%;
+      font: inherit;
+      color: #4e5d6f;
+    }
+
+    .editor-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .editor-btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .editor-btn.primary {
+      background: #1f71d8;
+      color: #fff;
+    }
+
+    .editor-btn.secondary {
+      background: #edf5ff;
+      color: #1f71d8;
+    }
+
+    .editor-tip {
+      margin-top: 12px;
+      color: #738397;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .thumb {
+      cursor: pointer;
+    }
+
+    .image-slot {
+      position: relative;
+    }
+
+    .image-slot::before {
+      content: attr(data-image-label);
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      z-index: 1;
+      background: rgba(20, 35, 58, 0.68);
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      padding: 6px 8px;
+      border-radius: 999px;
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      pointer-events: none;
+    }
+
+    .image-slot:hover::before {
+      opacity: 1;
+    }
+
+    .top-bar {
+      background: #fff;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px 14px;
+      border-bottom: 1px solid #edf1f6;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .home {
+      width: 30px;
+      height: 30px;
+      color: #111;
+      flex: 0 0 auto;
+    }
+
+    .capsule {
+      width: 98px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid #edf1f6;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(17, 24, 39, 0.04);
+      flex: 0 0 auto;
+    }
+
+    .capsule-divider {
+      width: 1px;
+      height: 18px;
+      background: #e9eef6;
+    }
+
+    .content {
+      padding: 0 12px;
+    }
+
+    .hero {
+      margin-top: 0;
+      padding: 22px 20px 18px;
+      border-radius: 0 0 18px 18px;
+      background:
+        radial-gradient(circle at 78% 20%, rgba(255, 255, 255, 0.42) 0, rgba(255, 255, 255, 0) 20%),
+        linear-gradient(135deg, #98c3ff 0%, #d9ebff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .hero::before {
+      width: 320px;
+      height: 320px;
+      right: -140px;
+      top: -120px;
+    }
+
+    .hero::after {
+      width: 220px;
+      height: 220px;
+      left: 160px;
+      top: -90px;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 38px;
+      font-weight: 900;
+      color: #1558b5;
+      letter-spacing: 0.03em;
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      color: #2d5d91;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .hero-meta small {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-badge {
+      width: 146px;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .stamp {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      border: 4px solid #2779cb;
+      display: grid;
+      place-items: center;
+      color: #2779cb;
+      background: rgba(255, 255, 255, 0.35);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .slab {
+      position: absolute;
+      right: 10px;
+      top: 32px;
+      width: 98px;
+      height: 118px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.55));
+      transform: rotate(16deg);
+      color: #2779cb;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 800;
+      line-height: 1.3;
+      box-shadow: 0 10px 24px rgba(39, 121, 203, 0.12);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      margin-top: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(224, 232, 241, 0.9);
+    }
+
+    .buyback {
+      padding: 16px;
+    }
+
+    .buyback h2,
+    .section-title {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    .buyback h2 span {
+      color: #ff8d1a;
+    }
+
+    .muted {
+      color: #667085;
+      font-size: 15px;
+      margin-top: 6px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #edf1f6;
+      margin: 14px 0;
+    }
+
+    .vin-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .car-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, #dfeaf4, #eef5fc);
+      border: 1px solid #dbe7f1;
+      flex: 0 0 auto;
+    }
+
+    .vin-main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .vin-tag {
+      display: inline-block;
+      border: 1px solid #cdd8e8;
+      color: #7e8ca4;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-bottom: 8px;
+      background: #f9fbff;
+    }
+
+    .vin-code {
+      font-size: 18px;
+      color: #5f6f83;
+      letter-spacing: 0.04em;
+    }
+
+    .vin-code strong {
+      color: #435165;
+      margin-right: 6px;
+    }
+
+    .photo-btn {
+      background: #1f71d8;
+      color: #fff;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+
+    .brand-line {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 14px;
+    }
+
+    .report-box {
+      margin-top: 14px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(126, 179, 255, 0.12), rgba(126, 179, 255, 0) 30%),
+        linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+      border: 1px solid #e4edf9;
+      padding: 18px 16px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .report-box::after {
+      content: "维真检测";
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      color: rgba(58, 118, 195, 0.2);
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .report-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .report-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .tabs-mini {
+      display: flex;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .tabs-mini span {
+      font-size: 10px;
+      border: 1px solid #c5d8ef;
+      border-radius: 2px;
+      padding: 2px 6px;
+      color: #6380a7;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .tabs-mini .active {
+      background: #2f75d6;
+      border-color: #2f75d6;
+      color: #fff;
+    }
+
+    .report-head-right {
+      color: #5e718b;
+      font-size: 13px;
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #30ca58;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+      gap: 8px;
+      margin-top: 26px;
+    }
+
+    .stat-ring {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      border: 4px solid #30ca58;
+      display: grid;
+      place-items: center;
+      color: #30a950;
+      font-size: 22px;
+      font-weight: 800;
+      background: #fff;
+    }
+
+    .stat-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .stat-sub {
+      margin-top: 8px;
+      color: #586a80;
+      font-size: 14px;
+    }
+
+    .summary-text {
+      margin-top: 18px;
+      color: #394b63;
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    .report-footer {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #dfe8f3;
+      color: #5d6f86;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .section {
+      padding: 14px 16px 16px;
+    }
+
+    .main-photo {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      margin-top: 14px;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 28px;
+      padding: 18px 0 8px;
+    }
+
+    .spec {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 16px;
+      color: #4e5b6a;
+    }
+
+    .spec strong {
+      color: #1f2430;
+      font-size: 19px;
+      letter-spacing: 0.02em;
+    }
+
+    .subhead {
+      margin-top: 10px;
+      color: #59697b;
+      font-size: 16px;
+    }
+
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .thumb {
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1.63;
+      background: #dde7f3;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .thumb.more::after {
+      content: "+32";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      background: rgba(16, 24, 40, 0.24);
+    }
+
+    .commission {
+      background: linear-gradient(180deg, #dff0ff 0%, #eff7ff 100%);
+      border-radius: 16px;
+      margin-top: 14px;
+      border: 1px solid #dfeaf8;
+      overflow: hidden;
+    }
+
+    .commission-top {
+      padding: 18px 18px 16px;
+    }
+
+    .commission-title {
+      margin: 0 0 18px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      text-align: center;
+    }
+
+    .icon-card {
+      display: grid;
+      place-items: center;
+      gap: 10px;
+      color: #181d27;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .icon-tile {
+      width: 58px;
+      height: 58px;
+      border-radius: 12px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 6px 16px rgba(36, 87, 147, 0.06);
+      border: 1px solid rgba(223, 234, 248, 0.9);
+    }
+
+    .commission-body {
+      background: #fff;
+      border-top: 1px solid #e3ecf7;
+      padding: 8px 0 0;
+    }
+
+    .inspect-block {
+      padding: 18px 18px 16px;
+      border-top: 1px solid #eef2f6;
+    }
+
+    .inspect-block:first-child {
+      border-top: 0;
+    }
+
+    .inspect-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .inspect-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .inspect-title {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .analysis-btn {
+      border: 1px solid #ced7e2;
+      background: #fff;
+      color: #5f6f80;
+      border-radius: 8px;
+      padding: 5px 11px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .inspect-conclusion {
+      margin-top: 14px;
+      color: var(--green-text);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .inspect-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #2f3947;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .count-pair {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .check-dot,
+    .warn-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .check-dot {
+      background: #5ad48a;
+    }
+
+    .check-dot::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 2px;
+      width: 4px;
+      height: 7px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .warn-dot {
+      background: var(--orange);
+    }
+
+    .caret {
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid #606b78;
+      border-bottom: 2px solid #606b78;
+      transform: rotate(45deg) translateY(-2px);
+      margin-left: 2px;
+    }
+
+    .note {
+      padding: 12px 18px 0;
+      color: #2f3947;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .disclaimer {
+      margin-top: 0;
+      padding: 6px 18px 18px;
+      color: #354255;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .disclaimer ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .disclaimer strong {
+      font-weight: 800;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0;
+        display: block;
+      }
+
+      .phone {
+        max-width: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .editor-panel {
+        position: static;
+        width: auto;
+        max-height: none;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        box-shadow: none;
+      }
+
+      .title {
+        font-size: 18px;
+      }
+
+      .brand {
+        font-size: 30px;
+      }
+
+      .section-title,
+      .buyback h2,
+      .commission-title {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside class="editor-panel">
+    <h2 class="editor-title">页面编辑器</h2>
+    <p class="editor-subtitle">可直接修改文字、替换图片、追加车辆照片。当前修改会保存在本浏览器里，刷新后仍会保留。</p>
+
+    <section class="editor-group">
+      <h3>文字修改</h3>
+      <div class="field">
+        <label for="edit-page-title">页面标题</label>
+        <input id="edit-page-title" type="text" data-edit-input="page-title">
+      </div>
+      <div class="field">
+        <label for="edit-brand">品牌标题</label>
+        <input id="edit-brand" type="text" data-edit-input="brand">
+      </div>
+      <div class="field">
+        <label for="edit-phone">预约电话</label>
+        <input id="edit-phone" type="text" data-edit-input="hero-phone">
+      </div>
+      <div class="field">
+        <label for="edit-report-id">报告编号</label>
+        <input id="edit-report-id" type="text" data-edit-input="report-id">
+      </div>
+      <div class="field">
+        <label for="edit-vin">VIN</label>
+        <input id="edit-vin" type="text" data-edit-input="vin-code">
+      </div>
+      <div class="field">
+        <label for="edit-car-name">车型名称</label>
+        <input id="edit-car-name" type="text" data-edit-input="car-name">
+      </div>
+      <div class="field">
+        <label for="edit-mileage">表显里程</label>
+        <input id="edit-mileage" type="text" data-edit-input="spec-mileage">
+      </div>
+      <div class="field">
+        <label for="edit-displacement">排量</label>
+        <input id="edit-displacement" type="text" data-edit-input="spec-displacement">
+      </div>
+      <div class="field">
+        <label for="edit-date">上牌日期</label>
+        <input id="edit-date" type="text" data-edit-input="spec-date">
+      </div>
+      <div class="field">
+        <label for="edit-gearbox">变速箱形式</label>
+        <input id="edit-gearbox" type="text" data-edit-input="spec-gearbox">
+      </div>
+      <div class="field">
+        <label for="edit-accident-pass">事故合格数</label>
+        <input id="edit-accident-pass" type="text" data-edit-input="accident-pass-count">
+      </div>
+      <div class="field">
+        <label for="edit-accident-total">事故项总数</label>
+        <input id="edit-accident-total" type="text" data-edit-input="accident-total-count">
+      </div>
+      <div class="field">
+        <label for="edit-accident-warn">事故异常数</label>
+        <input id="edit-accident-warn" type="text" data-edit-input="accident-warn-count">
+      </div>
+      <div class="field">
+        <label for="edit-summary">综述说明</label>
+        <textarea id="edit-summary" data-edit-input="summary-text"></textarea>
+      </div>
+      <div class="field">
+        <label for="edit-station">检测站点</label>
+        <input id="edit-station" type="text" data-edit-input="inspection-station">
+      </div>
+      <div class="field">
+        <label for="edit-time">检测时间</label>
+        <input id="edit-time" type="text" data-edit-input="inspection-time">
+      </div>
+    </section>
+
+    <section class="editor-group">
+      <h3>图片替换</h3>
+      <div class="field">
+        <label for="edit-main-photo">替换车辆主图</label>
+        <input id="edit-main-photo" type="file" accept="image/*" data-image-input="main-photo">
+      </div>
+      <div class="field">
+        <label for="edit-thumb-1">替换缩略图 1</label>
+        <input id="edit-thumb-1" type="file" accept="image/*" data-image-input="thumb-1">
+      </div>
+      <div class="field">
+        <label for="edit-thumb-2">替换缩略图 2</label>
+        <input id="edit-thumb-2" type="file" accept="image/*" data-image-input="thumb-2">
+      </div>
+      <div class="field">
+        <label for="edit-thumb-3">替换缩略图 3</label>
+        <input id="edit-thumb-3" type="file" accept="image/*" data-image-input="thumb-3">
+      </div>
+    </section>
+
+    <section class="editor-group">
+      <h3>添加图片</h3>
+      <div class="field">
+        <label for="add-gallery-images">向“车辆基本照”追加图片</label>
+        <input id="add-gallery-images" type="file" accept="image/*" multiple data-image-add="gallery">
+      </div>
+      <div class="editor-tip">新增图片会追加在现有缩略图后面；点击页面中的缩略图后可继续用上面的对应输入框替换。</div>
+    </section>
+
+    <div class="editor-actions">
+      <button class="editor-btn primary" type="button" id="save-json">导出当前配置</button>
+      <button class="editor-btn secondary" type="button" id="reset-page">重置页面</button>
+    </div>
+    <div class="editor-tip">导出当前配置会下载一个 `page-data.json`，便于后续复用当前文字和图片内容。</div>
+  </aside>
+
+  <div class="phone">
+    <div class="page">
+      <div class="top-bar">
+        <svg class="home" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M5.5 14.5 16 6l10.5 8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 12.6V25h5.8v-6.4h2.4V25H23V12.6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="title" data-edit-key="page-title">日产轩逸 车型配置仅供参考</div>
+        <div class="capsule" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="5" cy="12" r="2.1" fill="#111"/>
+            <circle cx="12" cy="12" r="2.1" fill="#111"/>
+            <circle cx="19" cy="12" r="2.1" fill="#111"/>
+          </svg>
+          <div class="capsule-divider"></div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="8" stroke="#111" stroke-width="2.2"/>
+            <circle cx="12" cy="12" r="2.8" fill="#111"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="brand" data-edit-key="brand">维真验车</div>
+            <div class="hero-meta">
+              <div data-edit-key="hero-phone">预约验车电话:400 997 0017</div>
+              <small data-edit-key="report-id">报告编号：NWZRHRYJB7ZPEJGK68A5F</small>
+            </div>
+          </div>
+          <div class="hero-badge" aria-hidden="true">
+            <div class="stamp">通</div>
+            <div class="slab">维真检测<br>真实车况</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <section class="card buyback">
+          <h2>本车<span>100天回购</span>保障</h2>
+          <div class="muted">维真验车提供100天 回购保障服务。</div>
+          <div class="divider"></div>
+
+          <div class="vin-row">
+            <div class="car-box"></div>
+            <div class="vin-main">
+              <div class="vin-tag">车型信息请以实车为准</div>
+              <div class="vin-code"><strong>VIN:</strong><span data-edit-key="vin-code">LGBH******366576</span></div>
+            </div>
+            <button class="photo-btn">车辆图片</button>
+          </div>
+
+          <div class="brand-line" data-edit-key="car-name">日产轩逸</div>
+
+          <div class="report-box">
+            <div class="report-head">
+              <div>
+                <h3 class="report-title">标准车况检</h3>
+                <div class="tabs-mini">
+                  <span class="active">国标工况</span>
+                  <span>举升检测</span>
+                  <span>真实车况</span>
+                </div>
+              </div>
+              <div class="report-head-right"><span class="dot"></span>检测合格部件数量</div>
+            </div>
+
+            <div class="stats">
+              <div>
+                <div class="stat-ring" data-edit-key="accident-pass-count">70</div>
+                <div class="stat-title">事故项<span data-edit-key="accident-total-count">71</span></div>
+                <div class="stat-sub">排除重大事故</div>
+              </div>
+              <div>
+                <div class="stat-ring">46</div>
+                <div class="stat-title">泡水项46</div>
+                <div class="stat-sub">排除泡水</div>
+              </div>
+              <div>
+                <div class="stat-ring">33</div>
+                <div class="stat-title">火烧项33</div>
+                <div class="stat-sub">排除火烧</div>
+              </div>
+            </div>
+
+            <div class="summary-text" data-edit-key="summary-text">
+              综述：经检测，该车排除重大事故、排除泡水、排除火烧。附加说明:该车为不举升检测，局部项目受限不可检，仅针对已检测项目负责。数据查询系统异常，未能查到数据。
+            </div>
+
+            <div class="report-footer">
+              检测站点：<span data-edit-key="inspection-station">济南蓝翔检测中心</span><br>
+              检测时间：<span data-edit-key="inspection-time">2026-06-14 12:31:17</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section">
+          <h2 class="section-title">车辆基础信息</h2>
+          <div class="image-slot" data-image-label="主图">
+            <img class="main-photo" data-image-key="main-photo" src="assets/car-main.jpg" alt="车辆主图">
+          </div>
+
+          <div class="spec-grid">
+            <div class="spec"><span>表 显 里 程</span><strong data-edit-key="spec-mileage">64732</strong></div>
+            <div class="spec"><span>排　　量</span><strong data-edit-key="spec-displacement">1.6</strong></div>
+            <div class="spec"><span>上 牌 日 期</span><strong data-edit-key="spec-date">2020-10</strong></div>
+            <div class="spec"><span>变速箱形式</span><strong data-edit-key="spec-gearbox">自动</strong></div>
+          </div>
+
+          <div class="subhead">车辆基本照</div>
+          <div class="thumbs" id="gallery">
+            <div class="thumb image-slot" data-image-label="缩略图 1">
+              <img data-image-key="thumb-1" src="assets/thumb-1.jpg" alt="车辆缩略图1">
+            </div>
+            <div class="thumb image-slot" data-image-label="缩略图 2">
+              <img data-image-key="thumb-2" src="assets/thumb-2.jpg" alt="车辆缩略图2">
+            </div>
+            <div class="thumb more image-slot" data-image-label="缩略图 3">
+              <img data-image-key="thumb-3" src="assets/thumb-3.jpg" alt="车辆缩略图3">
+            </div>
+          </div>
+        </section>
+
+        <section class="commission">
+          <div class="commission-top">
+            <h2 class="commission-title">委托检测</h2>
+            <div class="icon-grid">
+              <div class="icon-card">
+                <div class="icon-tile">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <path d="M7 20.5a9 9 0 0 1 18 0" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+                    <rect x="6" y="15" width="20" height="8" rx="2" stroke="#222" stroke-width="2.2"/>
+                    <path d="M10 23v3M22 23v3M11 12l3-4h4l3 4" stroke="#222" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="m26 9 3-2M4 9 1 7" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>事故项</div>
+              </div>
+              <div class="icon-card">
+                <div class="icon-tile">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <path d="M16 5c4.3 5 7 8.4 7 12.2A7 7 0 0 1 9 17.2C9 13.4 11.7 10 16 5Z" fill="#222"/>
+                    <path d="M7 24c2.5-2 5.5-3 9-3s6.5 1 9 3" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>泡水项</div>
+              </div>
+              <div class="icon-card">
+                <div class="icon-tile">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <path d="M16.2 4c1.4 3.3 6.8 6.8 6.8 12.6 0 4.5-3.1 8.4-7 8.4s-7-3.9-7-8.4C9 10.7 13.8 7.1 16.2 4Z" fill="#222"/>
+                  </svg>
+                </div>
+                <div>火烧项</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="commission-body">
+            <div class="inspect-block">
+              <div class="inspect-head">
+                <div class="inspect-left">
+                  <div class="inspect-title">事故项&nbsp;&nbsp;<span data-edit-key="accident-total-count-with-unit">71项</span></div>
+                  <button class="analysis-btn">解析</button>
+                </div>
+                <div class="inspect-right">
+                  <span class="count-pair"><span class="check-dot"></span><span data-edit-key="accident-pass-count-with-unit">70项</span></span>
+                  <span class="count-pair"><span class="warn-dot"></span><span data-edit-key="accident-warn-count-with-unit">1项</span></span>
+                  <span class="caret"></span>
+                </div>
+              </div>
+              <div class="inspect-conclusion">结论：排除重大事故</div>
+            </div>
+
+            <div class="inspect-block">
+              <div class="inspect-head">
+                <div class="inspect-left">
+                  <div class="inspect-title">泡水项&nbsp;&nbsp;46项</div>
+                  <button class="analysis-btn">解析</button>
+                </div>
+                <div class="inspect-right">
+                  <span class="count-pair"><span class="check-dot"></span><span>46项</span></span>
+                  <span class="count-pair"><span class="warn-dot"></span><span>0项</span></span>
+                  <span class="caret"></span>
+                </div>
+              </div>
+              <div class="inspect-conclusion">结论：排除泡水</div>
+            </div>
+
+            <div class="inspect-block">
+              <div class="inspect-head">
+                <div class="inspect-left">
+                  <div class="inspect-title">火烧项&nbsp;&nbsp;33项</div>
+                  <button class="analysis-btn">解析</button>
+                </div>
+                <div class="inspect-right">
+                  <span class="count-pair"><span class="check-dot"></span><span>33项</span></span>
+                  <span class="count-pair"><span class="warn-dot"></span><span>0项</span></span>
+                  <span class="caret"></span>
+                </div>
+              </div>
+              <div class="inspect-conclusion">结论：排除火烧</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="note">温馨提示：</div>
+        <div class="disclaimer">
+          <ol>
+            <li>此为车辆【标准车况检】检测报告，车型及配置仅供参考，请以实车为准。如需对车辆进行详细了解或对检测标准有异议，请到维真门店或致电400-997-0017。</li>
+            <li>报告中的“表显里程数”是根据检测车辆仪表显示的里程数进行填写，仅供参考。</li>
+            <li>为提高检测结果准确性，维真验车会对部分插件、内饰件进行拆卸，不对车身结构件、加强件等进行深度拆解。</li>
+            <li>车辆检测过程中某些检测项目需使用举升机或需拆解，如因其他原因导致无法对车辆进行举升，会导致部分项目【受限不可检】，维真验车仅对已检测项目负责，由于未举升发生的争议维真验车不承担任何责任。</li>
+            <li>检测结论仅供乙方了解车况或送至二手车评估主管机关审查使用，不适用于任何其他目的。若乙方因不当使用检测报告而产生的任何后果与甲方无关，甲方不承担相应的法律责任。</li>
+            <li>维真验车所提供的终身回购保障服务，仅在车辆检测合格并激活对应的保障后方可生效，单独出具检测报告不具备法律效力。</li>
+            <li>【标准车况检】产品只检测车辆是否为事故、泡水、火烧，三非判定缺陷以外描述不在服务范围。</li>
+            <li>判定标准依照《乘用车鉴定评估技术规范T/CADA 18-2021》《中消会T/CPQS A0011—2022二手车车况检测及评估通则》，详见各检测中心公示内容。</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const STORAGE_KEY = "car-template-editor-data-v1";
+
+    function collectDefaultTexts() {
+      const texts = {};
+      document.querySelectorAll("[data-edit-key]").forEach((node) => {
+        texts[node.dataset.editKey] = node.innerHTML;
+      });
+      return texts;
+    }
+
+    const originalTexts = collectDefaultTexts();
+
+    function loadState() {
+      const defaults = {
+        texts: { ...originalTexts },
+        images: {},
+        extraGallery: []
+      };
+
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return defaults;
+        const parsed = JSON.parse(raw);
+        return {
+          texts: { ...defaults.texts, ...(parsed.texts || {}) },
+          images: { ...(parsed.images || {}) },
+          extraGallery: Array.isArray(parsed.extraGallery) ? parsed.extraGallery : []
+        };
+      } catch {
+        return defaults;
+      }
+    }
+
+    let state = loadState();
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function applyTexts() {
+      document.querySelectorAll("[data-edit-key]").forEach((node) => {
+        const key = node.dataset.editKey;
+        if (state.texts[key] !== undefined) {
+          node.innerHTML = state.texts[key];
+        }
+      });
+
+      const titleNode = document.querySelector("[data-edit-key='page-title']");
+      if (titleNode) {
+        document.title = titleNode.textContent.trim();
+      }
+
+      syncDerivedCounts();
+    }
+
+    function syncDerivedCounts() {
+      const total = state.texts["accident-total-count"] || "";
+      const pass = state.texts["accident-pass-count"] || "";
+      const warn = state.texts["accident-warn-count"] || "";
+
+      const totalWithUnit = document.querySelector("[data-edit-key='accident-total-count-with-unit']");
+      const passWithUnit = document.querySelector("[data-edit-key='accident-pass-count-with-unit']");
+      const warnWithUnit = document.querySelector("[data-edit-key='accident-warn-count-with-unit']");
+
+      if (totalWithUnit) totalWithUnit.textContent = total ? `${total}项` : "";
+      if (passWithUnit) passWithUnit.textContent = pass ? `${pass}项` : "";
+      if (warnWithUnit) warnWithUnit.textContent = warn ? `${warn}项` : "";
+    }
+
+    function applyImages() {
+      document.querySelectorAll("[data-image-key]").forEach((img) => {
+        const key = img.dataset.imageKey;
+        if (state.images[key]) {
+          img.src = state.images[key];
+        }
+      });
+    }
+
+    function syncInputs() {
+      document.querySelectorAll("[data-edit-input]").forEach((input) => {
+        const key = input.dataset.editInput;
+        input.value = (state.texts[key] || "").replace(/<br\s*\/?>/gi, "\n");
+      });
+    }
+
+    function renderExtraGallery() {
+      document.querySelectorAll(".thumb.extra-thumb").forEach((node) => node.remove());
+      const gallery = document.getElementById("gallery");
+      state.extraGallery.forEach((src, index) => {
+        const item = document.createElement("div");
+        item.className = "thumb image-slot extra-thumb";
+        item.dataset.imageLabel = `新增图 ${index + 1}`;
+        item.innerHTML = `<img src="${src}" alt="新增车辆图片 ${index + 1}">`;
+        gallery.appendChild(item);
+      });
+    }
+
+    function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    document.querySelectorAll("[data-edit-input]").forEach((input) => {
+      input.addEventListener("input", () => {
+        const key = input.dataset.editInput;
+        const value = input.tagName === "TEXTAREA"
+          ? input.value.replace(/\n/g, "<br>")
+          : input.value;
+        state.texts[key] = value;
+        applyTexts();
+        saveState();
+      });
+    });
+
+    document.querySelectorAll("[data-image-input]").forEach((input) => {
+      input.addEventListener("change", async () => {
+        const [file] = input.files || [];
+        if (!file) return;
+        const key = input.dataset.imageInput;
+        const dataUrl = await fileToDataUrl(file);
+        state.images[key] = dataUrl;
+        applyImages();
+        saveState();
+        input.value = "";
+      });
+    });
+
+    const addGalleryInput = document.querySelector("[data-image-add='gallery']");
+    addGalleryInput.addEventListener("change", async () => {
+      const files = Array.from(addGalleryInput.files || []);
+      if (!files.length) return;
+      const images = await Promise.all(files.map(fileToDataUrl));
+      state.extraGallery.push(...images);
+      renderExtraGallery();
+      saveState();
+      addGalleryInput.value = "";
+    });
+
+    document.getElementById("reset-page").addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      state = {
+        texts: { ...originalTexts },
+        images: {},
+        extraGallery: []
+      };
+      applyTexts();
+      applyImages();
+      renderExtraGallery();
+      syncInputs();
+    });
+
+    document.getElementById("save-json").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "page-data.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    applyTexts();
+    applyImages();
+    renderExtraGallery();
+    syncInputs();
+  </script>
+</body>
+</html>
